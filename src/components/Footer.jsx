@@ -14,7 +14,7 @@ const Footer = () => {
         {/* Left: Logo & Text */}
         <div className="flex items-center gap-3">
           <img
-            src="./src/assets/logo.jpg"
+            src="/logo.jpg"
             alt="Logo"
             className="w-8 h-8 object-contain"
           />
