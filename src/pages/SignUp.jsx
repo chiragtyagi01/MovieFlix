@@ -68,7 +68,7 @@ const SignUp = () => {
 
       {/* Centered Login Form */}
       <div className="flex-grow flex items-center justify-center z-10">
-        <div className="w-full max-w-md bg-zinc-900 text-white rounded-xl shadow-lg p-8 space-y-6 z-10">
+        <div className="w-full max-w-md sm:bg-zinc-900 bg-transparent text-white rounded-xl shadow-lg p-8 space-y-6 z-10">
           <h2 className="text-4xl font-bold text-center">SignUp</h2>
 
           {error && (
