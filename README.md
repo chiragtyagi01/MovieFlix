@@ -2,10 +2,6 @@
 
 # MovieFlix 🎬
 
-![Vercel](https://vercelbadge.vercel.app/api/chiragtyagi01/movie-flix)
-![GitHub Repo stars](https://img.shields.io/github/stars/chiragtyagi01/movie-flix?style=social)
-![License](https://img.shields.io/github/license/chiragtyagi01/movie-flix)
-
 MovieFlix is a modern movie explorer app built with React, Firebase Authentication, TailwindCSS, and The Movie Database (TMDB) API. It features trending, top-rated, and popular movies, full authentication, favorites functionality, search, genre-based, and a smooth animated UI using react-fast-marquee.
 
 ---
