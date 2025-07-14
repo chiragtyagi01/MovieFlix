@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import MovieMarqueeBackground from "../components/MovieMarqueeBackground";
@@ -10,6 +10,19 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 640); // Tailwind's sm breakpoint
+    };
+  
+    checkScreenSize(); // Set on load
+    window.addEventListener("resize", checkScreenSize); // Update on resize
+  
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   if (user) return <Navigate to="/" replace />;
 
@@ -27,10 +40,28 @@ const SignUp = () => {
     <div className="min-h-screen flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-black via-gray-900 to-zinc-800 ">
       
       {/* Movie Marquee Backgrounds */}
-      <MovieMarqueeBackground type="movie/popular" position="top" speed={50} direction="left" />
-      <MovieMarqueeBackground type="trending/movie/day" position="middle" speed={50} direction="left" />
-      <MovieMarqueeBackground type="movie/top_rated" position="bottom" speed={50} direction="left" />
-      {/* Remove "middle" since it's not supported yet */}
+     {!isMobile && (
+          <MovieMarqueeBackground
+            type="trending/movie/day"
+            position="top"
+            speed={50}
+            direction="left"
+          />
+        )}
+
+        <MovieMarqueeBackground
+          type="movie/popular"
+          position={isMobile ? "top" : "middle"}
+          speed={50}
+          direction="left"
+        />
+
+        <MovieMarqueeBackground
+          type="movie/top_rated"
+          position={"bottom"}
+          speed={50}
+          direction="left"
+        />
 
       {/* Optional blur overlay */}
       {/* <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0" /> */}

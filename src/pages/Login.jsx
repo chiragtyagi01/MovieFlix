@@ -1,8 +1,10 @@
-import { useState } from "react";
+
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import MovieMarqueeBackground from "../components/MovieMarqueeBackground";
 import Footer from "../components/Footer";
+import { useState, useEffect } from "react";
+
 
 const Login = () => {
   const { user, login, loginWithGoogle } = useAuth();
@@ -10,6 +12,20 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const checkScreenSize = () => {
+    setIsMobile(window.innerWidth <= 640); // Tailwind's sm breakpoint
+  };
+
+  checkScreenSize(); // Set on load
+  window.addEventListener("resize", checkScreenSize); // Update on resize
+
+  return () => window.removeEventListener("resize", checkScreenSize);
+}, []);
+
 
   if (user) return <Navigate to="/" replace />;
 
@@ -27,17 +43,35 @@ const Login = () => {
     <div className="min-h-screen flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-black via-gray-900 to-zinc-800 ">
       
       {/* Movie Marquee Backgrounds */}
-      <MovieMarqueeBackground type="movie/popular" position="top" speed={50} direction="left" />
-      <MovieMarqueeBackground type="trending/movie/day" position="middle" speed={50} direction="left" />
-      <MovieMarqueeBackground type="movie/top_rated" position="bottom" speed={50} direction="left" />
-      {/* Remove "middle" since it's not supported yet */}
+     {!isMobile && (
+          <MovieMarqueeBackground
+            type="trending/movie/day"
+            position="top"
+            speed={50}
+            direction="left"
+          />
+        )}
+
+        <MovieMarqueeBackground
+          type="movie/popular"
+          position={isMobile ? "top" : "middle"}
+          speed={50}
+          direction="left"
+        />
+
+        <MovieMarqueeBackground
+          type="movie/top_rated"
+          position={"bottom"}
+          speed={50}
+          direction="left"
+        />
 
       {/* Optional blur overlay */}
       {/* <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0" /> */}
 
       {/* Centered Login Form */}
       <div className="flex-grow flex items-center justify-center z-10">
-        <div className="w-full max-w-md bg-zinc-900 text-white rounded-xl shadow-lg p-8 space-y-6 z-10">
+        <div className="w-full max-w-md sm:bg-zinc-900 bg-transparent text-white rounded-xl shadow-lg p-8 space-y-6 z-10">
           <h2 className="text-4xl font-bold text-center">Login</h2>
 
           {error && (

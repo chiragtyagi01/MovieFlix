@@ -58,7 +58,7 @@ function Home() {
     />
     <button
       type="submit"
-      className="px-6 py-3 bg-[#e50914] text-white rounded font-medium whitespace-nowrap hover:bg-[#f40612] transition-colors duration-200 cursor-pointer "
+      className="px-5 py-3 bg-[#e50914] text-white rounded font-medium whitespace-nowrap hover:bg-[#f40612] transition-colors duration-200 cursor-pointer "
     >
       Search
     </button>

@@ -2,21 +2,21 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 function NavBar() {
-  const { user, logout } = useAuth(); // ✅ use hook at the top
+  const { user, logout } = useAuth();
 
   return (
-    <nav className="bg-black px-8 py-4 flex justify-between items-center shadow-md sm:px-4">
+    <nav className="bg-black px-9 py-4 flex justify-between items-center shadow-md sm:px-5 gap-3">
       {/* Left: Brand */}
       <div className="text-xl font-bold text-white sm:text-lg">
         MovieFlix
       </div>
 
       {/* Center: Nav Links */}
-      <div className="flex gap-4 sm:gap-2">
+      <div className="flex gap-2 sm:gap-2">
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `text-white px-4 py-2 rounded transition-colors duration-200 ${
+            `text-white px-3 py-2 rounded transition-colors duration-200 ${
               isActive ? "bg-white/20" : "hover:bg-white/10"
             }`
           }
